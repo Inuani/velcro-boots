@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥾 Velcro Boot 🥾</title>
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --accent-color: #4ECDC4;
+            --gradient1: #FF6B6B;
+            --gradient2: #4ECDC4;
+            --gradient3: #45B7D1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #FF6B6B, #4ECDC4, #45B7D1, #96E6A1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .floating-emojis {
+            position: fixed;
+            font-size: 30px;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            animation: bounce 2s infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        .auth-container:hover {
+            transform: translateY(-10px) rotateX(10deg);
+            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.3);
+        }
+
+        .boot-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+            animation: pulse 3s infinite;
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .ii-button {
+            background: linear-gradient(-45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ii-button:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .ii-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .energy-bar-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            backdrop-filter: blur(8px);
+            transform-style: preserve-3d;
+        }
+
+        .energy-bar {
+            width: 100%;
+            height: 50px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .energy-fill {
+            height: 100%;
+            background: linear-gradient(45deg, var(--gradient1), var(--gradient2), var(--gradient3));
+            background-size: 200% 200%;
+            animation: gradientBG 5s ease infinite;
+            transition: width 0.5s ease-in-out;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .energy-fill::before {
+            content: '⚡';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            animation: zap 1s infinite;
+        }
+
+        @keyframes zap {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+
+        .energy-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            from { transform: translateX(-100%) rotate(45deg); }
+            to { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .boot-image {
+                max-width: 300px;
+            }
+
+            .energy-bar {
+                height: 40px;
+            }
+
+            .ii-button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: sparkle 1s linear forwards;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translate(0, 0) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floating-emojis" style="top: 10%; left: 10%">🥾</div>
+        <div class="floating-emojis" style="top: 20%; right: 15%">⚡</div>
+        <div class="floating-emojis" style="top: 70%; left: 15%">✨</div>
+        <div class="floating-emojis" style="top: 60%; right: 10%">🌟</div>
+
+        <header class="header">
+            <h1>Velcro Boot!</h1>
+        </header>
+
+        <div class="auth-container">
+            <div id="auth-section">
+                <button id="auth-button" class="ii-button">✨ Sign in for Magic ✨</button>
+            </div>
+            <p style="margin-top: 15px;">Current Principal: <span id="principal-display">Loading... 🔮</span></p>
+        </div>
+
+        <img class="boot-image" src="/velcro_boot.webp" alt="velcro boot">
+
+        <div class="energy-bar-container">
+            <h3>⚡ Compute fuel ⚡</h3>
+            <div class="energy-bar">
+                <div class="energy-fill" id="energy-fill"></div>
+                <div class="energy-text" id="energy-text"></div>
+            </div>
+            <div class="energy-details">
+                <span id="raw-balance">⚡</span>
+                <span id="percentage">🔋</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/bundle.js" type="module"></script>
+    <script>
+        // Add sparkle effect on click
+        document.addEventListener('click', (e) => {
+            for(let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = ['✨', '⭐', '🌟'][Math.floor(Math.random() * 3)];
+                sparkle.style.setProperty('--tx', `${(Math.random() - 0.5) * 100}px`);
+                sparkle.style.setProperty('--ty', `${(Math.random() - 0.5) * 100}px`);
+                sparkle.style.left = e.pageX + 'px';
+                sparkle.style.top = e.pageY + 'px';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+    </script>
+</body>
+</html>
