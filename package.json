@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "description": "Velcro_boot canister",
     "scripts": {
-        "upload": "node upload.js",
         "dev": "mo-dev -y",
         "start": "webpack serve",
         "build": "webpack"
